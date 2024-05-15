@@ -1,6 +1,7 @@
 import bcrypt from 'bcryptjs';
 import db from '../models';
 
+
 const salt = bcrypt.genSaltSync(10);
 let createNewUser = async (data) => {
     return new Promise(async (resolve, reject) => {
@@ -34,6 +35,20 @@ let hashUserPassword = (password) => {
         }
     });
 }
+
+let getAllUser = () => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let users = db.User.findAll({
+                raw: true,
+            });
+            resolve(users)
+        } catch (e) {
+            reject(e)
+        }
+    })
+}
 module.exports = {
     createNewUser: createNewUser,
+    getAllUser: getAllUser
 }
