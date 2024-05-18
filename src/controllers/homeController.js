@@ -19,9 +19,11 @@ let getCRUD = (req, res) => {
     return res.render('./crud.ejs')
 }
 let postCRUD = async (req, res) => {
-    let message = await CRUDservice.createNewUser(req.body)
-    console.log(message)
-    return res.send('post crud')
+    let message = await CRUDservice.createNewUser(req.body);
+    let data = await CRUDservice.getAllUser();
+    return res.render('displayCRUD.ejs', {
+        data: data
+    })
 }
 
 let displayCRUD = async (req, res) => {
@@ -52,6 +54,26 @@ let putCRUD = async (req, res) => {
         data: allUser
     });
 }
+let displayDeleteCRUD = async (req, res) => {
+    let userId = req.query.id;
+    console.log(userId)
+    if (userId) {
+        let userData = await CRUDservice.getUserInfoById(userId);
+        return res.render('deleteCRUD.ejs', {
+            usersInfo: userData
+        });
+    }
+    else {
+        return res.send('hello from controller')
+    }
+}
+let deleteCRUD = async (req, res) => {
+    let data = req.body;
+    let allUser = await CRUDservice.deleteUserData(data);
+    return res.render('displayCRUD.ejs', {
+        data: allUser
+    });
+}
 module.exports = {
     getHomePage: getHomePage,
     getAboutPage: getAboutPage,
@@ -59,5 +81,7 @@ module.exports = {
     postCRUD: postCRUD,
     displayCRUD: displayCRUD,
     editCRUD: editCRUD,
-    putCRUD: putCRUD
+    putCRUD: putCRUD,
+    deleteCRUD: deleteCRUD,
+    displayDeleteCRUD: displayDeleteCRUD
 }
