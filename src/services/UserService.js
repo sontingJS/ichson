@@ -1,6 +1,7 @@
 import { where } from "sequelize";
 import db from "../models/index";
 import bcrypt from 'bcryptjs';
+import { raw } from "body-parser";
 let handleUserLogin = (email, password) => {
     return new Promise(async (resolve, reject) => {
         try {
@@ -72,8 +73,36 @@ let checkUserEmail = (email) => {
     })
 }
 
+let getAllUser = (userId) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let users = {};
+            if (userId === 'ALL') {
+                users = await db.User.findAll({
+                    attributes: {
+                        exclude: ['password']
+                    }
+                })
+            }
+            if (userId && userId !== 'ALL') {
+                users = await db.User.findOne({
+                    where: {
+                        id: userId,
+                    },
+                    attributes: {
+                        exclude: ['password']
+                    }
+                })
+            }
+            resolve(users)
+        } catch (e) {
+            reject(e)
+        }
+    })
+}
 
 module.exports = {
     handleUserLogin: handleUserLogin,
     checkUserEmail: checkUserEmail,
+    getAllUser: getAllUser,
 }
