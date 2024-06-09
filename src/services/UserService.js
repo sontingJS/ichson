@@ -34,7 +34,7 @@ let handleUserLogin = (email, password) => {
                     }
                     else {
                         userData.errCode = 3;
-                        user.errMessage = 'wrong password';
+                        userData.errMessage = `wrong password`;
                     }
                 }
                 else {
