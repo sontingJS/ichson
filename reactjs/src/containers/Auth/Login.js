@@ -90,7 +90,7 @@ class Login extends Component {
                                     this.handleOnchangePassword(event)
                                 }}
                             />
-                                <span onClick={() => { this.handleShowPassword() }} className='isShowPassword'><i class={this.state.isShowPassword ? "fas fa-eye-slash" : "fas fa-eye"} ></i></span></div>
+                                <span onClick={() => { this.handleShowPassword() }} className='isShowPassword'><i className={this.state.isShowPassword ? "fas fa-eye-slash" : "fas fa-eye"} ></i></span></div>
                         </div>
                         <div className='col-12 text-danger'>
                             {this.state.errMessage}
@@ -105,7 +105,7 @@ class Login extends Component {
                             <span className=''>Or login with :</span>
                             <div className='col-12 social-login'>
                                 <i className='fab fa-google-plus google'></i>
-                                <i class="fab fa-facebook facebook"></i>
+                                <i className="fab fa-facebook facebook"></i>
                             </div>
                         </div>
                     </div>

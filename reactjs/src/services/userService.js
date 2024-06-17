@@ -10,4 +10,17 @@ const handleLoginApi = async (userEmail, userPassword,) => {
 const getAllUsers = (inputId) => {
     return axios.get(`/api/get-all-user?id=${inputId}`)
 }
-export { handleLoginApi, getAllUsers }
+const addNewUser = async (data) => {
+    return await axios.post('/api/creat-new-user', data)
+}
+const deleteUser = async (userId) => {
+    return await axios.delete(`/api/delete-user`, {
+        data: {
+            id: userId
+        }
+    });
+}
+const updateUser = async (data) => {
+    return await axios.put(`/api/edit-user`, data);
+}
+export { handleLoginApi, getAllUsers, addNewUser, deleteUser, updateUser }
